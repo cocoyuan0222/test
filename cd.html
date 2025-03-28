@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐播放器</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .cd-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+
+        .cd {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: url('cd.png') no-repeat center/cover;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: spin 3s linear infinite;
+            animation-play-state: paused; /* 初始暂停 */
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cd-container">
+        <div class="cd" id="cd"></div>
+    </div>
+
+    <div class="controls">
+        <button class="button" onclick="toggleMusic()">播放 / 暂停</button>
+    </div>
+
+    <audio id="audio" src="和谐的乐曲11-改.mp3"></audio>
+
+    <script>
+        let audio = document.getElementById('audio');
+        let cd = document.getElementById('cd');
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                cd.style.animationPlayState = 'running'; // 让CD旋转
+            } else {
+                audio.pause();
+                cd.style.animationPlayState = 'paused'; // 停止旋转
+            }
+        }
+    </script>
+
+</body>
+</html>
